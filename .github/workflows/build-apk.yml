@@ -1,0 +1,43 @@
+name: Build AAYUSH SALES APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'AAYUSH-SALES-COMPLETE-ERP.zip'
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '8.10'
+
+      - name: Extract AAYUSH SALES
+        run: |
+          unzip -o AAYUSH-SALES-COMPLETE-ERP.zip
+          ls -la
+          ls -la AAYUSH-SALES-Full-ERP
+
+      - name: Build APK
+        working-directory: AAYUSH-SALES-Full-ERP
+        run: gradle :app:assembleDebug --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AAYUSH-SALES-APK
+          path: AAYUSH-SALES-Full-ERP/app/build/outputs/apk/debug/app-debug.apk
