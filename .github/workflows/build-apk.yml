@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'AAYUSH-SALES-COMPLETE-ERP-V2.zip'
+      - 'AAYUSH-SALES-MODERN-UI-V5.zip'
       - '.github/workflows/build-apk.yml'
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Extract AAYUSH SALES
         run: |
-          unzip -o AAYUSH-SALES-COMPLETE-ERP-V2.zip
+          unzip -o AAYUSH-SALES-MODERN-UI-V5.zip
           ls -la
           ls -la AAYUSH-SALES-Full-ERP
 
